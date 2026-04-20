@@ -25,6 +25,13 @@
 - [Lab 6 - Predictive Parsing Table LL1](#lab-6--predictive-parsing-table-ll1)
 - [Lab 7 - Shift Reduce Parsing SLR1](#lab-7--shift-reduce-parsing-slr1)
 - [Lab 8 - LEADING and TRAILING Sets](#lab-8--leading-and-trailing-sets)
+- [Lab 9 - Computation of LR(0) Items](#lab-9--computation-of-lr0-items)
+- [Lab 10 - Postfix and Prefix Conversion](#lab-10--postfix-and-prefix-conversion)
+- [Lab 11 - Quadruple Triple and Indirect Triple](#lab-11--quadruple-triple-and-indirect-triple)
+- [Lab 12 - Simple Code Generator](#lab-12--simple-code-generator)
+- [Lab 13 - DAG for Common Subexpression Elimination](#lab-13--dag-for-common-subexpression-elimination)
+- [Lab 14 - Data Flow Analysis Reaching Definitions](#lab-14--data-flow-analysis-reaching-definitions)
+- [Lab 15 - Storage Allocation](#lab-15--storage-allocation)
 - [How to Run Any Lab](#how-to-run-any-lab)
 - [Overall Compiler Flow](#overall-compiler-flow)
 
@@ -41,7 +48,7 @@ COMPILER-DESIGN-LAB/
 |   +-- Re_to_nfa.py
 |   +-- Readme.md
 +-- Lab 3 Conversion from NFA to DFA/
-|   +-- Nfa_dfa.py
+|   +-- Nfa-dfa.py
 |   +-- Readme.md
 +-- Lab 4 Elimation of Ambiguity, Left Recursion and Left Factoring/
 |   +-- Lftrecursion.py
@@ -58,6 +65,27 @@ COMPILER-DESIGN-LAB/
 +-- Lab 8- Computation of LEADING AND TRAILING/
 |   +-- lead&trailing.py
 |   +-- Readme.md
++-- Lab 9-  Computation of LR (0) items/
+|   +-- lr0items.py
+|   +-- Readme.md
++-- Lab10_Postfix_Prefix/
+|   +-- postfix_prefix.py
+|   +-- README.md
++-- Lab11_Quad_Triple/
+|   +-- quad_triple.py
+|   +-- README.md
++-- Lab12_Code_Generator/
+|   +-- codegen.py
+|   +-- README.md
++-- Lab13_DAG/
+|   +-- dag.py
+|   +-- README.md
++-- Lab14_DataFlow/
+|   +-- dataflow.py
+|   +-- README.md
++-- Lab15_Storage_Allocation/
+|   +-- storage_allocation.py
+|   +-- README.md
 +-- README.md
 ```
 
@@ -148,7 +176,7 @@ NFA: q0 --epsilon--> q1 (branch a), q2 (branch b)
 
 ## Lab 3 - NFA to DFA
 
-**File:** `Nfa_dfa.py` | **Status:** Completed
+**File:** `Nfa-dfa.py` | **Status:** Completed
 
 Converts an NFA to an equivalent **Deterministic Finite Automaton (DFA)** using the **Subset Construction (Powerset) Algorithm**. Each DFA state corresponds to a set of NFA states. The resulting DFA is then used to simulate input string acceptance.
 
@@ -514,6 +542,84 @@ Operator a      Relation      Operator b
 
 ---
 
+## Lab 9 - Computation of LR(0) Items
+
+**File:** `lr0items.py` | **Status:** Completed
+
+Builds canonical LR(0) item sets using closure and goto operations. It augments the grammar, computes state transitions, and prints the complete LR(0) automaton state by state.
+
+**Core outputs:** Augmented grammar start symbol, item sets I0..In, and GOTO transitions.
+
+---
+
+## Lab 10 - Postfix and Prefix Conversion
+
+**File:** `postfix_prefix.py` | **Status:** Completed
+
+Converts infix expressions to postfix and prefix notation using precedence and associativity rules. It also includes postfix evaluation for numeric expressions.
+
+**Supports:** `+ - * / ^`, parentheses, multi-character operands, right-associative exponentiation.
+
+---
+
+## Lab 11 - Quadruple Triple and Indirect Triple
+
+**File:** `quad_triple.py` | **Status:** Completed
+
+Generates intermediate-code representations from postfix expressions in three standard forms:
+
+- Quadruples: `(op, arg1, arg2, result)`
+- Triples: indexed operations without explicit temporaries
+- Indirect triples: pointer table over triples
+
+---
+
+## Lab 12 - Simple Code Generator
+
+**File:** `codegen.py` | **Status:** Completed
+
+Translates Three-Address Code into assembly-like target code using register and address descriptors. It demonstrates register allocation, load/store operations, and arithmetic instruction emission.
+
+**Input format:** `(result, op, arg1, arg2)` tuples for TAC.
+
+---
+
+## Lab 13 - DAG for Common Subexpression Elimination
+
+**File:** `dag.py` | **Status:** Completed
+
+Constructs a Directed Acyclic Graph for basic blocks to detect and merge common subexpressions. Reused computations map to shared internal DAG nodes.
+
+**Benefit:** Reduces redundant evaluation and highlights optimization opportunities.
+
+---
+
+## Lab 14 - Data Flow Analysis Reaching Definitions
+
+**File:** `dataflow.py` | **Status:** Completed
+
+Performs iterative global data-flow analysis to compute GEN, KILL, IN, and OUT sets for Reaching Definitions across a control-flow graph.
+
+**Equation used:**
+
+$$
+IN[B] = \bigcup_{p \in pred(B)} OUT[p], \quad OUT[B] = GEN[B] \cup (IN[B] - KILL[B])
+$$
+
+---
+
+## Lab 15 - Storage Allocation
+
+**File:** `storage_allocation.py` | **Status:** Completed
+
+Demonstrates three memory-allocation strategies used by compilers and runtime systems:
+
+- Static allocation with fixed addresses
+- Stack allocation with activation records
+- Heap allocation with first-fit free-list management
+
+---
+
 ## How to Run Any Lab
 
 These scripts are built in **pure Python 3** with **zero external dependencies**.
@@ -532,6 +638,13 @@ python "Lab 5 -FIRST AND FOLLOW computation/First-follow-func.py"
 python "Lab 6 Predictive Parsing Table/Parsetable.py"
 python "Lab 7 - Shift Reduce Parsing/Shiftreduce.py"
 python "Lab 8- Computation of LEADING AND TRAILING/lead&trailing.py"
+python "Lab 9-  Computation of LR (0) items/lr0items.py"
+python "Lab10_Postfix_Prefix/postfix_prefix.py"
+python "Lab11_Quad_Triple/quad_triple.py"
+python "Lab12_Code_Generator/codegen.py"
+python "Lab13_DAG/dag.py"
+python "Lab14_DataFlow/dataflow.py"
+python "Lab15_Storage_Allocation/storage_allocation.py"
 ```
 
 **Requirements:** Python 3.6+
@@ -558,6 +671,7 @@ graph LR
         B --> F{Grammar Prep}
         F -->|Lab 4| G[Clean CFG]
         G -->|Lab 5| H[FIRST and FOLLOW]
+        G -->|Lab 9| H2[LR0 Item Sets]
         H -->|Lab 6| I[LL1 Top-Down Parser]
         H -->|Lab 7| J[SLR1 Bottom-Up Parser]
         G -->|Lab 8| K[Operator Precedence Parser]
@@ -566,6 +680,15 @@ graph LR
     I --> L[Parse Tree]
     J --> L
     K --> L
+
+    subgraph "Intermediate Code and Optimization"
+        L -->|Lab 10| M[Postfix and Prefix Forms]
+        M -->|Lab 11| N[Quad Triple Representations]
+        N -->|Lab 12| O[Target Code Generation]
+        N -->|Lab 13| P[DAG Optimization]
+        P -->|Lab 14| Q[Data Flow Facts]
+        O -->|Lab 15| R[Storage Allocation Strategy]
+    end
 ```
 
 ---
